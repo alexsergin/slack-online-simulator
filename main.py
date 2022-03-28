@@ -39,6 +39,13 @@ with webdriver.Firefox(options=options) as driver:
 
     # Waiting for logged in
     while True:
+        # Skipping app opening prompt
+        try:
+            driver.find_element_by_xpath('/html/body/div[1]/div/div/div[2]/p/a').click()
+        except NoSuchElementException:
+            pass
+
+        # Looking for menu
         try:
             driver.find_element_by_class_name('p-channel_sidebar__name')
             logging.info('Logged in')
